@@ -4,7 +4,8 @@ import { API_BASE_URL, API_KEY } from "@env";
 export default axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    Authorization: `Bearer ${API_KEY}`,
+    Authorization: "Bearer " + API_KEY,
+    "Content-Type": "application/json",
     accept: "application/json",
   },
 });
