@@ -1,32 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
 import SearchBar from "../components/SearchBar";
-import yelp from "../api/yelp";
+import useResults from "../hooks/useResults";
 
 const SearchScreen = () => {
   const [term, setTerm] = useState("");
-  const [results, setResults] = useState([]);
-  const [errorMessage, setErrorMessage] = useState();
-  const [loading, setLoading] = useState(false);
-
-  const searchRestaurants = async () => {
-    try {
-      setLoading(true);
-      const response = await yelp.get("/search", {
-        params: {
-          limit: 50,
-          term: term,
-          location: "san jose",
-        },
-      });
-      setResults(response.data.businesses);
-      setErrorMessage();
-    } catch (error) {
-      setErrorMessage("Something went wrong :(");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { results, errorMessage, loading, searchRestaurants } = useResults();
 
   return (
     <View>
